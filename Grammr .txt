@@ -1,0 +1,27 @@
+lines: lines line | line;
+line: expr newline | expr;
+expr: expr op expr2 | expr2 | sy op expr2 | expr op1 expr2 | sy op1 expr2 | sy op2 sy | sy op3 sy;
+
+
+op: '+';
+op1: '-';
+expr2: expr2 op2 paren | paren | equality | sy op2 expr3 | expr2 op3 paren | sy op3 expr3;
+paren: '(' expr ')' | num;
+equality: sy '=' expr3;
+expr3: num | sy op num | sy op1 sy | sy op3 sy | sy op3 sy;
+op2: '*';
+op3: '/';
+num: "\d+";
+newline: '\r\n' | '\n';
+sy: 'x' | 'y';
+
+
+INTRODUCING THE NEGATIVE SIGN
+
+expr: expr sp op sp mul| mul;
+op: '+' | '-';
+mul: expr sp '*' sp neg | neg;
+neg: '-' sp paren | paren;
+paren: '(' expr ')' | num;
+num: "\d+";
+sp: "\s*";
